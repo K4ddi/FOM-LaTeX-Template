@@ -436,25 +436,6 @@
 %TC:ignore - ignoriert die folgnden Wörter beim Wordcount in Overleaf
 
 %-----------------------------------
-% Apendix / Anhang
-%-----------------------------------
-\newpage
-\section*{\AppendixName} %Überschrift "Anhang", ohne Nummerierung
-\addcontentsline{toc}{section}{\AppendixName} %Den Anhang ohne Nummer zum Inhaltsverzeichnis hinzufügen
-
-\begin{appendices}
-% Nachfolgende Änderungen erfolgten aufgrund von Issue 163
-\makeatletter
-\renewcommand\@seccntformat[1]{\csname the#1\endcsname:\quad}
-\makeatother
-\addtocontents{toc}{\protect\setcounter{tocdepth}{0}} %
-	\renewcommand{\thesection}{\AppendixName\ \arabic{section}}
-	\renewcommand\thesubsection{\AppendixName\ \arabic{section}.\arabic{subsection}}
-	\input{kapitel/anhang/anhang}
-\end{appendices}
-\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
-
-%-----------------------------------
 % Literaturverzeichnis
 %-----------------------------------
 \newpage
@@ -463,9 +444,9 @@
 % Literaturverzeichnis ein, egal ob sie zietiert wurden oder nicht.
 % Der Befehl ist also nur zum Test der Skripte sinnvoll und muss bei echten
 % Arbeiten entfernt werden.
-%\nocite{*}
+\nocite{*}
 
-%\addcontentsline{toc}{section}{Literatur}
+\addcontentsline{toc}{section}{Literatur}
 
 % Die folgenden beiden Befehle würden ab dem Literaturverzeichnis wieder eine
 % römische Seitennummerierung nutzen.
