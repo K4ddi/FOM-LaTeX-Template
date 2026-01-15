@@ -12,7 +12,7 @@ Die Architektur der Anwendung orientiert sich am Prinzip der Separation of Conce
     \item DuplicateUserException: Eine eigene definierte, geprüfte Ausnahme (Checked Exception), die zur Steuerung des Programmflusses bei redundanten Registrierungsversuchen eingesetzt wird.
 \end{itemize}
 
-\lstinputlisting[language=Java, firstnumber=6]{./Quellcode/DuplicateUserException.java}
+\lstinputlisting[language=Java, firstnumber=6, caption=DuplicateUserException Z.6-12]{./Quellcode/DuplicateUserException.java}
 \begin{center}
     \begin{small}
         Quelle: Abschnitt von Projektarbeit-Programmieren/src/DuplicateUserException.java Z.6-14
@@ -25,7 +25,7 @@ Der Registrierungsvorgang (Main.handleRegister) beginnt mit einer lokalen Validi
 Nach erfolgreicher Validierung delegiert die Steuerung an den UserStore. Die Methode addUser lädt zunächst den bestehenden Datenbestand (loadAllUsers), um Redundanzen auszuschließen. Sollte der Benutzer bereits existieren, wird eine DuplicateUserException geworfen, die von der aufrufenden Schicht (Main) abgefangen und in eine benutzerfreundliche Fehlermeldung umgewandelt wird. Technische Schreibfehler (z. B. IOException) werden an dieser Stelle lediglich protokolliert, um einen Programmabsturz zu verhindern.
 
 \clearpage
-\lstinputlisting[language=Java, firstnumber=86]{./Quellcode/Main1.java}
+\lstinputlisting[language=Java, firstnumber=86, caption=Main Z.86-92]{./Quellcode/Main1.java}
 \begin{center}
     \begin{small}
         Quelle: Abschnitt von Projektarbeit-Programmieren/src/Main.java Z.86-92
@@ -34,7 +34,7 @@ Nach erfolgreicher Validierung delegiert die Steuerung an den UserStore. Die Met
 
 \subsubsection{Der Authentifizierungsprozess (Login)}
 Beim Login (Main.handleLogin) wird mittels UserStore.findByEmail(email) der Datenbestand abgefragt. Eine Besonderheit ist hier der Rückgabetyp: Statt null zurückzugeben, wenn kein Nutzer gefunden wird, liefert die Methode ein Objekt vom Typ Optional<User> \footcite[Vgl.][]{Oracle_d}. In der Steuerungslogik wird mittels .isPresent() geprüft, ob ein Nutzer existiert. Ist dies der Fall, wird der Hash des eingegebenen Passworts berechnet und mit dem gespeicherten Hash des gefundenen Nutzers verglichen. Stimmen beide Hashes überein, gilt der Benutzer als authentifiziert.
-\lstinputlisting[language=Java, firstnumber=105]{./Quellcode/Main2.java}
+\lstinputlisting[language=Java, firstnumber=105, caption=Main Z.105-114]{./Quellcode/Main2.java}
 \begin{center}
     \begin{small}
         Quelle: Abschnitt von Projektarbeit-Programmieren/src/Main.java Z.105-114
@@ -44,16 +44,17 @@ Beim Login (Main.handleLogin) wird mittels UserStore.findByEmail(email) der Date
  \subsection{Robustheit der Persistenzschicht}
  Besonderes Augenmerk wurde auf die Fehlertoleranz beim Einlesen der Daten (UserStore.loadAllUsers) gelegt. Der Parser ist so implementiert, dass korrupte Einzeldatensätze (z. B. durch Formatierungsfehler) nicht zum Abbruch des gesamten Ladevorgangs führen. Stattdessen werden fehlerhafte Zeilen übersprungen und im Error-Log vermerkt. Eine fehlende Datenbankdatei (NoSuchFileException) wird vom System als leerer Initialzustand interpretiert, was die Benutzerfreundlichkeit beim ersten Programmstart sicherstellt.
 
-\lstinputlisting[language=Java, firstnumber=69]{./Quellcode/UserStore1.java}
+\lstinputlisting[language=Java, firstnumber=69, caption=UserStore Z.69-80]{./Quellcode/UserStore1.java}
 \begin{center}
     \begin{small}
         Quelle: Abschnitt von Projektarbeit-Programmieren/src/UserStore.java Z.69-80
     \end{small}
 \end{center} 
-
+\clearpage
  \subsection{Technische Schlüssellösungen}
  Ressourcenmanagement: Zur Vermeidung von Speicherlecks wird konsequent das try-with-resources-Konstrukt eingesetzt, das das automatische Schließen von Streams (AutoCloseable) garantiert \footcite[Vlg.][]{Oracle_b}.
-\lstinputlisting[language=Java, firstnumber=66]{./Quellcode/UserStore2.java}
+ 
+\lstinputlisting[language=Java, firstnumber=66, caption=UserStore Z.66]{./Quellcode/UserStore2.java}
 \begin{center}
     \begin{small}
         Quelle: Abschnitt von Projektarbeit-Programmieren/src/UserStore.java Z.66
@@ -62,7 +63,7 @@ Beim Login (Main.handleLogin) wird mittels UserStore.findByEmail(email) der Date
 
 Thread-Sicherheit: Zentrale Methoden in UserStore und EventLogger sind als synchronized deklariert, um bei potenziellen Dateioperationen Race Conditions zu vermeiden \footcite[Vgl.][]{Oracle_e}.
 
-\lstinputlisting[language=Java, firstnumber=37]{./Quellcode/Eventlogger1.java}
+\lstinputlisting[language=Java, firstnumber=37, caption=UserStore Z.37]{./Quellcode/Eventlogger1.java}
 \begin{center}
     \begin{small}
         Quelle: Abschnitt von Projektarbeit-Programmieren/src/Eventlogger.java Z.37
