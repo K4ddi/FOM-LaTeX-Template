@@ -58,7 +58,7 @@
 \usepackage{amsmath}
 \usepackage[table]{xcolor}
 \usepackage{marvosym}			% Verwendung von Symbolen, z.B. perfektes Eurozeichen
-
+\usepackage{minted}
 \renewcommand\familydefault{\sfdefault}
 \usepackage{ragged2e}
 
@@ -95,38 +95,20 @@
 %-----------------------------------
 % sauber formatierter Quelltext
 %-----------------------------------
-\usepackage{listings}
-% JavaScript als Sprache definieren:
-\lstdefinelanguage{JavaScript}{
-	keywords={break, super, case, extends, switch, catch, finally, for, const, function, try, continue, if, typeof, debugger, var, default, in, void, delete, instanceof, while, do, new, with, else, return, yield, enum, let, await},
-	keywordstyle=\color{blue}\bfseries,
-	ndkeywords={class, export, boolean, throw, implements, import, this, interface, package, private, protected, public, static},
-	ndkeywordstyle=\color{darkgray}\bfseries,
-	identifierstyle=\color{black},
-	sensitive=false,
-	comment=[l]{//},
-	morecomment=[s]{/*}{*/},
-	commentstyle=\color{purple}\ttfamily,
-	stringstyle=\color{red}\ttfamily,
-	morestring=[b]',
-	morestring=[b]"
-}
-
+% Java als Sprache definieren:
+\usepackage{courier} %% Sets font for listing as Courier.
+\usepackage{listings, xcolor}
 \lstset{
-	%language=JavaScript,
-	numbers=left,
-	numberstyle=\tiny,
-	numbersep=5pt,
-	breaklines=true,
-	showstringspaces=false,
-	frame=l ,
-	xleftmargin=5pt,
-	xrightmargin=5pt,
-	basicstyle=\ttfamily\scriptsize,
-	stepnumber=1,
-	keywordstyle=\color{blue},          % keyword style
-  	commentstyle=\color{dkgreen},       % comment style
-  	stringstyle=\color{mauve}         % string literal style
+tabsize = 4, %% set tab space width
+showstringspaces = false, %% prevent space marking in strings, string is defined as the text that is generally printed directly to the console
+numbers = left, %% display line numbers on the left
+commentstyle = \color{green}, %% set comment color
+keywordstyle = \color{blue}, %% set keyword color
+stringstyle = \color{red}, %% set string color
+rulecolor = \color{black}, %% set frame color to avoid being affected by text color
+basicstyle = \small \ttfamily , %% set listing font and size
+breaklines = true, %% enable line breaking
+numberstyle = \tiny,
 }
 
 %-----------------------------------
@@ -387,15 +369,15 @@
 %-----------------------------------
 % Tabellenverzeichnis
 %-----------------------------------
-\listoftables
-\newpage
+%\listoftables
+%\newpage
 %-----------------------------------
 % Abkürzungsverzeichnis
 %-----------------------------------
 % Falls das Abkürzungsverzeichnis nicht im Inhaltsverzeichnis angezeigt werden soll
 % dann folgende Zeile auskommentieren.
-\addcontentsline{toc}{section}{\abbreHeadingName}
-\input{abkuerzungen/acronyms}
+%\addcontentsline{toc}{section}{\abbreHeadingName}
+%\input{abkuerzungen/acronyms}
 \newpage
 
 %-----------------------------------
@@ -404,16 +386,16 @@
 % In Overleaf führt der Einsatz des Symbolverzeichnisses zu einem Fehler, der aber ignoriert werdne kann
 % Falls das Symbolverzeichnis nicht im Inhaltsverzeichnis angezeigt werden soll
 % dann folgende Zeile auskommentieren.
-\phantomsection\addcontentsline{toc}{section}{\symheadingname}
-\input{skripte/symbolDef}
-\listofsymbols
+%\phantomsection\addcontentsline{toc}{section}{\symheadingname}
+%\input{skripte/symbolDef}
+%\listofsymbols
 \newpage
 
 %-----------------------------------
 % Glossar
 %-----------------------------------
-\printnoidxglossaries
-\newpage
+%\printnoidxglossaries
+%\newpage
 
 %-----------------------------------
 % Sperrvermerk
@@ -444,9 +426,9 @@
 % Literaturverzeichnis ein, egal ob sie zietiert wurden oder nicht.
 % Der Befehl ist also nur zum Test der Skripte sinnvoll und muss bei echten
 % Arbeiten entfernt werden.
-\nocite{*}
+%\nocite{*}
 
-\addcontentsline{toc}{section}{Literatur}
+%\addcontentsline{toc}{section}{Literatur}
 
 % Die folgenden beiden Befehle würden ab dem Literaturverzeichnis wieder eine
 % römische Seitennummerierung nutzen.
@@ -487,7 +469,7 @@
 %\printbibliography[type=online,heading=bibintoc,title={\headingNameInternetSources}]
 \printbibliography[type=online,heading=subbibliography,title={\headingNameInternetSources}]
 
-\input{kapitel/anhang/erklaerung}
+%\input{kapitel/anhang/erklaerung}
 \end{document}
 
 %TC:endignore - benötigt für Wordcount in Overleaf

@@ -1,5 +1,42 @@
 \section{Grundlagen}
+\subsection{Error vs. Exception}
+In der Entwicklungswelt wird zwischen Error und Exception unterschieden.
 
-\subsection{}
+Ein Error bezeichnet einen systembedingten Fehler, zum Beispiel im Betriebssystem (OS) oder in der Java Virtual Machine (JVM), der vom Programm nicht behandelt oder behoben werden kann. Solche Fehler entstehen durch externe, programmunabhängige Ursachen \footcite[Vgl. ][S. 517]{1Dev_Exp_Hand}. Der Umgang mit diesen kritischen Situationen erfordert ein tiefgehendes Verständnis der internen Abläufe des Laufzeitsystems sowie der Spracharchitektur und fällt daher in den Zuständigkeitsbereich der Systemprogrammierung \footcite[Vgl. ][S. 8]{3Exp_Hand_a}.
 
-\subsection{}
+Typische Beispiele für solche Fehler sind der StackOverflowError, der auftritt, wenn der Aufrufstapel durch unendliche Rekursion das Speicherlimit überschreitet, sowie der OutOfMemoryError, der bei unzureichendem Arbeitsspeicher ausgelöst wird \footcite[Vgl. ][]{4Exp_Hand_b}.
+
+Eine Exception (Ausnahme) ist ein Fehler, der im Programm selbst entsteht und während der Programmausführung auftritt. Grundsätzlich sollte auf solche Situationen mit einer geeigneten Fehlerbehandlung reagiert werden. Die geprüften Ausnahmen (Checked Exceptions) werden dabei bewusst ausgelöst und müssen vom Anwendungsentwickler innerhalb der Anwendung abgefangen und verarbeitet werden. Erfolgt dies nicht, gibt der Compiler beim Übersetzen des Programms eine entsprechende Fehlermeldung aus \footcite[Vgl.][S. 9]{3Exp_Hand_a}.
+Es wird zwischen Checked und Unchecked Exceptions unterschieden.
+
+\subsection{Checked vs Unchecked Exception}
+Bei einer Checked Exception handelt es sich um einen vorhersehbaren Fehlerfall, der nicht unmittelbar durch das Programm selbst verursacht wird. Dementsprechend muss dieser vom Programmierer behandelt werden. Es ist eine Fehlerbehebung mittels try-catch oder eine Deklaration der Ausnahme über throws erforderlich \footcite[Vgl.][S. 517]{1Dev_Exp_Hand}. Checked Exceptions sind also throwable \footcite[Vgl.][S. 425]{2Java_Lang_Spec} und werden zudem vom Compiler überwacht \footcite[Vgl.][S. 9]{3Exp_Hand_a}. Neu definierte Ausnahmeklassen werden in der Regel als Checked Exceptions umgesetzt, sodass sie bereits zur Compile-Zeit überprüft werden\footcite[Vgl.][]{4Exp_Hand_b}.
+
+Folgende Ausnahmeklassen sind typische Beispiele für die Checked Exceptions:
+Die FileNotFoundException beschreibt eine Situation, in der beim Öffnen einer Datei ein Fehler auftritt, da die Datei nicht existiert oder die erforderlichen Zugriffsrechte fehlen.  Zur Fehlerbehandlung kann der Aufrufer dann eine andere Datei über einen Dateiauswahldialog auswählen \footcite[Vgl.][]{4Exp_Hand_b}.
+
+Bei der IOException handelt es sich um einen Fehler, der etwa beim Senden einer Anfrage an einen externen Dienst auftreten kann, wenn die entsprechende API (Application Programming Interface), also die Programmschnittstelle, nicht erreichbar ist. Als sinnvolle Erholungsmaßnahme kann die Anfrage dann zu einem späteren Zeitpunkt erneut gesendet werden\footcite[Vgl.][]{4Exp_Hand_b}.
+
+Eine Unchecked Exception ist ein logischer Programmierfehler, der vom Compiler nicht überprüft wird, jedoch vom Programmierer grundsätzlich behandelt werden kann. In der Praxis werden solche Ausnahmen meist nicht abgefangen, da Unchecked Exceptions an sehr vielen Stellen auftreten können und somit eine umfassende Behandlung den Code unnötig überladen würde \footcite[Vgl.][S. 9]{3Exp_Hand_a}.
+
+Zu den Unchecked Exceptions zählen die RuntimeExceptions sowie die Errors. Alle übrigen Exceptions gelten entsprechend als Checked Exceptions\footcite[Vgl.][S. 424-425]{2Java_Lang_Spec}.
+ 
+\subsection{Die Exception Hierarchie}
+Alle Klassen der Exceptions besitzen die Basisklasse Throwable als gemeinsamen Ursprung, welche wiederum eine Unterklasse der Klasse Object ist. Klassen, die von Throwable erben, dürfen keine generischen Typparameter besitzen\footcite[Vgl.][S. 424-425]{2Java_Lang_Spec}. Zur Fehlerausgabe stellt die Klasse Throwable Methoden wie getMessage(), toString() sowie printStackTrace() bereit \footcite[Vgl.][S. 8]{3Exp_Hand_a}.
+\begin{figure}[H]
+\caption{Exception Hierarchie}\label{fig:Exp_Hie_Fig}
+\includegraphics[width=0.9\textwidth]{abbildungen/Exp_Hie_Fig.png}
+\\
+Quelle: Exception Hierarchie\footcite[][]{5Abb_Ex_Hie}
+\end{figure}
+
+Unmittelbar unterhalb von Throwable befinden sich die beiden Unterklassen Error und Exception. Error sowie alle seine Unterklassen zählen zu den Unchecked Exceptions. Alle Unterklassen der Klasse Exception, ausgenommen die Runtime Exceptions sowie deren Unterklassen, sind Checked Exceptions \footcite[Vgl.][S. 424]{2Java_Lang_Spec}.
+
+RuntimeExceptions entstehen während der Laufzeit eines Programms und werden von der Java Virtual Machine (JVM) ausgelöst. Die Ursachen dieser Ausnahme liegen daher intern im System\footcite[Vgl. ][S. 517]{1Dev_Exp_Hand}. Da solche Fehler in vielen Methoden auftreten können, wäre eine explizite Behandlung jeder einzelnen Ausnahme sehr aufwendig. Aus diesem Grund gelten die RuntimeExceptions als Unchecked Exceptions \footcite[Vgl.][S. 9]{3Exp_Hand_a}.
+
+Folgende Unterklassen gehören zu den RuntimeExceptions:
+
+Die ArithmeticException tritt auf, wenn eine arithmetische Operation nicht erlaubt ist, wie beispielsweise die Division eines Integer-Werts durch Null \footcite[Vgl.][S. 9]{3Exp_Hand_a}.
+
+Eine NullPointerException entsteht, wenn versucht wird, über eine Null-Referenz auf ein Attribut oder eine Methode zuzugreifen \footcite[Vgl.][S. 9]{3Exp_Hand_a}.
+Die ArrayIndexOutOfBoundsException wird ausgelöst, wenn auf ein Array mit einem Index zugegriffen wird, der außerhalb des gültigen Bereichs liegt \footcite[Vgl.][]{4Exp_Hand_b}.

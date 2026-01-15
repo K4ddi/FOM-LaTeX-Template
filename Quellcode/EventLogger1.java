@@ -1,0 +1,1 @@
+public synchronized void logEvent(String who, String action, String result) {
