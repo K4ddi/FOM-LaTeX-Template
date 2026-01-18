@@ -1,5 +1,19 @@
-\section{Probleme und Relevanz}
+\section{Problembereich und Relevanz}
+\subsection{Typische Fehlerquellen}
+Oft treten in Softwareprojekten bestimmte Problembereiche auf, die den regulären Ablauf stören. Für eine strukturierte und kontrollierte Fehlerbehandlung ist das Exception Handling essenziell.
+Typische Fehlerquellen entstehen dabei insbesondere im Zusammenhang mit Eingaben und Ausgaben (I/O), der Verarbeitung von Eingaben (Parsing) sowie der Verwendung eines Nullwertes\footcite[Vgl.][]{9_CJE}.
+ 
+Der Bereich I/O befasst sich mit der Verarbeitung von Dateien, Netzwerken und Benutzern. Hier können Fehler wie unzureichende Schreibrechte, Netzwerkunterbrechungen sowie nicht existierende Dateien auftreten. Um Programmabbrüche nun zu verhindern, kann man Exceptions wie FileNotFoundException oder IOException verwenden\footcite[Vgl.][]{9_CJE}.
+ 
+Ein weiterer Problembereich ist das Parsing, also die Konvertierung von Texten in bestimmte Datentypen. Wenn der Eingabestring nicht dem erwarteten Format entspricht, wird eine ParseException ausgelöst. Ein typisches Szenario ist die Verarbeitung von Datumsangaben in unterschiedlichen Formaten (z.B. „dd/MM/yyyy“ oder „dd,MM,yyyy“)\footcite[Vgl.][]{9_CJE}.
+ 
+Ein letztes Beispiel ist die Verwendung eines Nullwerts an Stellen, an denen ein Objekt erwartet wird. Wenn das Programm nun versucht, eine Methode auf einem nicht existierenden Objekt aufzurufen, wirft Java eine NullPointerException\footcite[Vgl.][]{9_CJE}.
 
-\subsection{}
-
-\subsection{}
+\subsection{Warum Exception-Handling hilft}
+Das Exception Handling adressiert die in 3.1 beschriebenen Fehlerquellen strukturiert und verhindert dadurch unkontrollierte Programmabbrüche. Somit können Exceptions gezielt abgefangen werden, und der normale Programmablauf wird fortgesetzt.
+ 
+Ein wesentlicher Vorteil besteht darin, dass die Fehlerbehandlungslogik vom regulären Programmfluss getrennt wird. Das bedeutet, dass die Exceptions zentral behandelt werden, während der Hauptcode übersichtlich bleibt. Dies trägt zur Verständlichkeit bei und erleichtert das Lesen \footcite[Vgl.][]{10_AOE}.
+ 
+Darüber hinaus ermöglicht das Exception Handling die Propagation von Fehlern entlang des Aufrufstapels. Das bedeutet, dass nur Methoden behandelt werden müssen, die sich um die jeweiligen Fehlertypen kümmern. Alle anderen behalten ihren regulären Ablauf bei. Hier werden also die Fehler gezielt auf höheren Ebenen abgefangen, ohne dass der Code unnötig komplex wird\footcite[Vgl.][]{10_AOE}.
+ 
+Abschließend lassen sich die präzise Erkennung und Behandlung von unterschiedlichen Fehlerarten nennen. Es lassen sich verwandte Fehlergruppen bilden und sowohl spezifische als auch allgemeine Handler einsetzen. Auf diese Weise lassen sich beispielsweise sämtliche I/O-Fehler gemeinsam behandeln. Andere spezialisierte Exceptions werden gezielt abgefangen\footcite[Vgl.][]{10_AOE}.

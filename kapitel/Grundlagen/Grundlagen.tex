@@ -40,3 +40,58 @@ Die ArithmeticException tritt auf, wenn eine arithmetische Operation nicht erlau
 
 Eine NullPointerException entsteht, wenn versucht wird, über eine Null-Referenz auf ein Attribut oder eine Methode zuzugreifen \footcite[Vgl.][S. 9]{3Exp_Hand_a}.
 Die ArrayIndexOutOfBoundsException wird ausgelöst, wenn auf ein Array mit einem Index zugegriffen wird, der außerhalb des gültigen Bereichs liegt \footcite[Vgl.][]{4Exp_Hand_b}.
+
+\subsection{Mechanismen}
+In diesem Abschnitt wird der grundlegende Mechanismus des Exception Handling beschrieben, der eine strukturierte Fehlerbehandlung ermöglicht.
+ 
+Der try-Block umschließt den Code, bei dem potenziell Exceptions auftreten können. Sobald eine Exception ausgelöst wird, wird der reguläre Programmablauf unterbrochen. Um diesen Fehler zu behandeln, wird der passende Catch-Block verwendet. Die Kontrolle wird dem passenden catch-Block überreicht, der vorab konkret definiert wurde, sodass die entsprechenden Maßnahmen ausgeführt werden und das Programm nicht abstürzt. Gegebenenfalls können mehrere Catch-Blöcke definiert werden, um alle Exception-Typen zu behandeln. Unabhängig davon, ob eine Exception auftritt, wird ein finally-Block ausgeführt. Dieser ist ideal für Aufräumarbeiten und wird zum Abschluss des try-catch-Blocks verwendet\footcite[Vgl. ][]{4Exp_Hand_b, 2_TCJ}. 
+
+\lstinputlisting[language=Java, firstnumber=1, caption=Exeption mit Finally]{./Quellcode/Ex1.java}
+\begin{center}
+    \begin{small}
+        Quelle:Java Exceptions - Try...Catch\footcite[][]{2_TCJ}
+    \end{small}
+\end{center} 
+\clearpage
+
+Die throws-Klausel wird verwendet, um Exceptions an den Aufrufer weiterzuleiten, da eine Methode gewisse Exceptions nicht selbst behandelt. Diese muss dementsprechend deklariert werden, damit der Aufrufer über die Exception informiert ist und diese behandelt oder weiterreicht\footcite[Vgl][]{5_TvT}.
+
+\lstinputlisting[language=Java, firstnumber=1, caption=Die Throws-Klausel]{./Quellcode/Ex2.java}
+\begin{center}
+    \begin{small}
+        Quelle:throw vs throws\footcite[][]{5_TvT}
+    \end{small}
+\end{center} 
+
+Durch throw können Exceptions manuell geworfen werden, wenn eine unerlaubte Situation erkannt wird. Somit kann die Kontrolle dem passenden catch-Block übergeben werden\footcite[Vgl.][]{2_TCJ,5_TvT}.
+
+\lstinputlisting[language=Java, firstnumber=1, caption=Die Throw-Klausel]{./Quellcode/Ex3.java}
+\begin{center}
+    \begin{small}
+        Quelle:throw vs throws\footcite[][]{5_TvT}
+    \end{small}
+\end{center} 
+
+\subsection{Eigene Exceptions}
+Neben den vordefinierten Exception-Klassen gibt es auch die Möglichkeit, durch Spezialisierung anderer Klassen, eigene zu realisieren. Dadurch bietet sich eine bessere Ausdruckskraft im Quellcode und es ermöglicht eine differenzierte Fehlerbehandlung.
+ 
+Eigene Exceptions werden normalerweise durch Vererbung realisiert. Dabei differenziert man zwischen Exceptions (checked) und RuntimeExceptions (unchecked). Checked Exceptions erben von der Klasse Exception und müssen vom Compiler entweder innerhalb eines try-catch Blocks behandelt oder über die throws-Klausel weitergegeben werden. Unchecked Exceptions erben jedoch von RuntimeExceptions und müssen nicht explizit deklariert werden \footcite[Vlg.][]{6_SP, 7_CCEJ, 8_JCE}.
+ 
+Die verwendete Variante hängt von der Art des Fehlerzustands ab. Ist der Zustand vorhersehbar und sinnvoll behandelbar, sind checked Exceptions geeignet.
+Handelt es sich hingegen um schwerwiegende oder unerwartete Fehler, sind die unchecked Exceptions sinnvoller\footcite[Vgl.][]{6_SP,7_CCEJ}.
+
+Eine eigene Exception-Klasse verfügt mindestens über einen Konstruktor, der die Fehlermeldung an die Oberklasse weiterleitet. Optional ist die Übergabe weiterer Informationen wie cause oder Fehlercodes\footcite[Vgl.][]{7_CCEJ,8_JCE}.
+\clearpage
+\lstinputlisting[language=Java, firstnumber=1, caption=Checked-Exception]{./Quellcode/Ex4.java}
+\begin{center}
+    \begin{small}
+        Quelle:Exception-Handling\footcite[][]{4Exp_Hand_b}
+    \end{small}
+\end{center} 
+
+\lstinputlisting[language=Java, firstnumber=1, caption=Unchecked-Exception]{./Quellcode/Ex5.java}
+\begin{center}
+    \begin{small}
+        Quelle:Exception-Handling\footcite[][]{4Exp_Hand_b}
+    \end{small}
+\end{center} 
