@@ -75,9 +75,7 @@ Durch throw können Exceptions manuell geworfen werden, wenn eine unerlaubte Sit
 \subsection{Eigene Exceptions}
 Neben den vordefinierten Exception-Klassen gibt es auch die Möglichkeit, durch Spezialisierung anderer Klassen, eigene zu realisieren. Dadurch bietet sich eine bessere Ausdruckskraft im Quellcode und es ermöglicht eine differenzierte Fehlerbehandlung.
  
-Eigene Exceptions werden normalerweise durch Vererbung realisiert. Dabei differenziert man zwischen Exceptions (checked) und RuntimeExceptions (unchecked). Checked Exceptions erben von der Klasse Exception und müssen vom Compiler entweder innerhalb eines try-catch Blocks behandelt oder über die throws-Klausel weitergegeben werden. Unchecked Exceptions erben jedoch von RuntimeExceptions und müssen nicht explizit deklariert werden \footcite[Vlg.][]{6_SP, 7_CCEJ, 8_JCE}.
- 
-Die verwendete Variante hängt von der Art des Fehlerzustands ab. Ist der Zustand vorhersehbar und sinnvoll behandelbar, sind checked Exceptions geeignet.
+Eigene Exceptions werden normalerweise durch Vererbung realisiert. Dabei differenziert man zwischen Exceptions (checked) und RuntimeExceptions (unchecked). Die verwendete Variante hängt von der Art des Fehlerzustands ab. Ist der Zustand vorhersehbar und sinnvoll behandelbar, sind checked Exceptions geeignet.
 Handelt es sich hingegen um schwerwiegende oder unerwartete Fehler, sind die unchecked Exceptions sinnvoller\footcite[Vgl.][]{6_SP,7_CCEJ}.
 
 Eine eigene Exception-Klasse verfügt mindestens über einen Konstruktor, der die Fehlermeldung an die Oberklasse weiterleitet. Optional ist die Übergabe weiterer Informationen wie cause oder Fehlercodes\footcite[Vgl.][]{7_CCEJ,8_JCE}.
